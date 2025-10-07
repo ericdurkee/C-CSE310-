@@ -11,9 +11,12 @@ The purpose of writing this software was to gain practical experience with C++ f
 # Development Environment
 
 Code editor: Visual Studio Code
+
 Compiler: G++
+
 Program Language: C++
-Libraries: <iostream>, <cctype>, <string>
+
+Libraries: iostream, cctype, string
 
 # Useful Websites
 
