@@ -3,11 +3,12 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <vector>
 
 using namespace std;
 
 // define characters and check if password has them
-
+// check for lowercase letters
 bool hasLowercase(const std::string& password) {
     for (char c : password) {
         if (islower(c)) return true;
@@ -15,6 +16,7 @@ bool hasLowercase(const std::string& password) {
     return false;
 }
 
+// check for uppercase letters
 bool hasUppercase(const std::string& password) {
     for (char c : password) {
         if (isupper(c)) return true;
@@ -22,6 +24,7 @@ bool hasUppercase(const std::string& password) {
     return false;
 }
 
+// check for digits
 bool hasDigit(const std::string& password) {
     for (char c : password) {
         if (isdigit(c)) return true;
@@ -29,6 +32,7 @@ bool hasDigit(const std::string& password) {
     return false;
 }
 
+// check for special characters and define special characters
 bool hasSpecialChar(const std::string& password) {
     std::string specialChars = "!@#$%^&*()_+[]{}|:;'\",.<>?/";
     for (char c : password) {
@@ -38,7 +42,6 @@ bool hasSpecialChar(const std::string& password) {
 }
 
 // check password strength
-
 std::string checkStrength(const std::string& password) {
     int score = 0;
 
@@ -53,8 +56,22 @@ std::string checkStrength(const std::string& password) {
     else return "Strong";
 }
 
-// User feedback
+// For when SHA-256 is added
+string hashedPassword(const string& password) {
+    //Placeholder for SHA-256
+    return "hashed_" + password;
+}
 
+// Check common passwords
+bool isCommonPassword(const string& password) {
+    vector<string> common = {"password", "123456", "abc123"};
+    for (const string& p : common) {
+        if (password == p) return true;
+    }
+    return false;
+}
+
+// User feedback
 int main() {
     std::string password;
     const int MAX_LENGTH = 20;
@@ -67,8 +84,12 @@ int main() {
         std::cout << "Password too short! Must be at least " << MIN_LENGTH << " characters." << std::endl;
         return 0;
     }
-    if (password.length() < MAX_LENGTH) {
+    if (password.length() > MAX_LENGTH) {
         std::cout << "Password too long! Must be at least " << MIN_LENGTH << " characters." << std::endl;
+        return 0;
+    }
+    if (isCommonPassword(password)) {
+        cout << "This password is too common!" << endl;
         return 0;
     }
 
